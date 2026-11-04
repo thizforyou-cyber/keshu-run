@@ -2,7 +2,7 @@
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
 const keshuCharacter=new Image();keshuCharacter.src='assets/keshu-character.webp?v=1';
 const $=id=>document.getElementById(id);
-const jumpVoice=new Audio('assets/keshu-jump.ogg');jumpVoice.preload='auto';
+const jumpVoice=new Audio('assets/keshu-jump.mp3');jumpVoice.preload='auto';
 const scoreEl=$('score'),bestEl=$('best'),coinsEl=$('coins'),overlay=$('overlay');
 let state='ready',score=0,coins=0,best=Number(localStorage.getItem('keshuRunBest')||0),speed=5.2,frame=0,obstacles=[],stars=[];
 const ground=355,player={x:145,y:293,w:43,h:62,vy:0,onGround:true,duck:0};bestEl.textContent=String(best).padStart(5,'0');
