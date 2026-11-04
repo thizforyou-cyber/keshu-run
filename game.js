@@ -1,15 +1,12 @@
 (() => {
 const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
 const keshuCharacter=new Image();keshuCharacter.src='assets/keshu-character.webp?v=1';
-const jumpSound=new Audio('assets/keshu.mp3');jumpSound.preload='auto';jumpSound.loop=true;
-const coinSound=new Audio('assets/keshu.mp3');coinSound.preload='auto';
+const jumpSound=new Audio('assets/Keshu.mp3');jumpSound.preload='auto';jumpSound.loop=true;
+const coinSound=new Audio('assets/Keshu.mp3');coinSound.preload='auto';
 const stopJumpSound=()=>{jumpSound.pause();jumpSound.currentTime=0};
 const $=id=>document.getElementById(id);
 const scoreEl=$('score'),bestEl=$('best'),coinsEl=$('coins'),overlay=$('overlay');
 let state='ready',score=0,coins=0,best=Number(localStorage.getItem('keshuRunBest')||0),speed=5.2,frame=0,obstacles=[],stars=[];
-const jumpSound=new Audio('assets/keshu-action.mp3');jumpSound.loop=true;jumpSound.preload='auto';
-const coinSound=new Audio('assets/keshu-action.mp3');coinSound.preload='auto';
-function stopJumpSound(){jumpSound.pause();jumpSound.currentTime=0;}
 const ground=355,player={x:145,y:293,w:43,h:62,vy:0,onGround:true,duck:0};bestEl.textContent=String(best).padStart(5,'0');
 function rounded(x,y,w,h,r,c){ctx.fillStyle=c;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
 function background(){let g=ctx.createLinearGradient(0,0,0,355);g.addColorStop(0,'#79cfe7');g.addColorStop(1,'#d3f1dc');ctx.fillStyle=g;ctx.fillRect(0,0,900,440);ctx.fillStyle='#ffe59a';ctx.beginPath();ctx.arc(735,82,37,0,7);ctx.fill();ctx.fillStyle='#8ccba9';ctx.beginPath();ctx.moveTo(0,280);for(let x=0;x<=900;x+=100)ctx.quadraticCurveTo(x+45,215+Math.sin(x)*12,x+100,280);ctx.lineTo(900,355);ctx.lineTo(0,355);ctx.fill();for(let i=0;i<8;i++){let x=((i*150-frame*.65)%1100+1100)%1100-80;ctx.fillStyle='#5b9f7d';ctx.fillRect(x+17,265,12,60);ctx.fillStyle='#398e70';ctx.beginPath();ctx.arc(x+23,250,34,0,7);ctx.fill()}ctx.fillStyle='#e9c98d';ctx.fillRect(0,355,900,85);ctx.fillStyle='#7fc47e';ctx.fillRect(0,355,900,12)}
